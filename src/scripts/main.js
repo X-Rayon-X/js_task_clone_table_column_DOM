@@ -7,11 +7,18 @@ const indexCopyColumn = 1;
 
 for (const row of table.rows) {
   const cells = row.cells;
+
+  if (indexCopyColumn >= cells.length) {
+    continue;
+  }
+
   const ourCell = cells[indexCopyColumn];
 
   const newCell = ourCell.cloneNode(true);
 
-  const indexPasteColumn = cells.length - 1;
-
-  row.insertBefore(newCell, cells[indexPasteColumn]);
+  if (cells.length >= 1) {
+    row.insertBefore(newCell, cells[cells.length - 1]);
+  } else {
+    row.appendChild(newCell);
+  }
 }
